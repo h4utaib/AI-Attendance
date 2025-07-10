@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Simple Chat with Granite Model</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .chat-container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 600px;
+    }
+
+    h1 {
+      font-size: 1.8rem;
+      text-align: center;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 12px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: vertical;
+      font-size: 1rem;
+      margin-bottom: 10px;
+    }
+
+    button {
+      display: inline-block;
+      padding: 10px 20px;
+      font-size: 1rem;
+      background-color: #4a90e2;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #357ab8;
+    }
+
+    h3 {
+      margin-top: 20px;
+      color: #444;
+    }
+
+    pre {
+      background-color: #f0f0f0;
+      padding: 15px;
+      border-radius: 6px;
+      font-family: monospace;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <h1>Ansari Exchange Attendance AI BOT</h1>
+    <textarea id="question" rows="4" placeholder="Ask your question here..."></textarea><br />
+    <button onclick="sendQuestion()">Ask</button>
+
+    <h3>Answer:</h3>
+    <pre id="answer"></pre>
+  </div>
+
+  <script>
+    async function sendQuestion() {
+      const question = document.getElementById("question").value;
+      if (!question.trim()) {
+        alert("Please enter a question.");
+        return;
+      }
+      document.getElementById("answer").textContent = "Thinking...";
+
+      try {
+        const response = await fetch("/chat", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ question })
+        });
+
+        const data = await response.json();
+        document.getElementById("answer").textContent = data.answer;
+      } catch (error) {
+        document.getElementById("answer").textContent = "Error getting response.";
+        console.error(error);
+      }
+    }
+  </script>
+</body>
+</html>
