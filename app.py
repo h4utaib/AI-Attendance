@@ -54,10 +54,10 @@ def load_attendance_data(csv_path):
     return documents
 
 CSV_PATH = "./Sample_Employees_Attendance_Data.csv"
-ES_HOST = "https://elasticsearch-sample-hutaib-rag.apps.cluster-s79sm.s79sm.sandbox803.opentlc.com"
-ES_AUTH = ("elastic", "561tBc4Kv8LHx2x6K8m0Ccp5")
+ES_HOST = ""
+ES_AUTH = ("elastic", "")
 ES_INDEX_NAME = "attendance_index0045"
-INFERENCE_SERVER_URL = "https://mistral-7b-instruct-v02-hutaib-rag.apps.cluster-s79sm.s79sm.sandbox803.opentlc.com/v1/completions"
+INFERENCE_SERVER_URL = ""
 MODEL_NAME = "mistral-7b-instruct-v02"
 
 client = Elasticsearch([ES_HOST], basic_auth=ES_AUTH, verify_certs=False)
