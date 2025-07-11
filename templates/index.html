@@ -2,89 +2,129 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Simple Chat with Granite Model</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>OpenShift Attendance AI</title>
   <style>
     * {
       box-sizing: border-box;
     }
 
     body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      background-color: #f4f4f9;
       margin: 0;
-      padding: 0;
+      font-family: 'Red Hat Text', 'Segoe UI', sans-serif;
       display: flex;
-      justify-content: center;
-      align-items: center;
       height: 100vh;
-    }
-
-    .chat-container {
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-      width: 90%;
-      max-width: 600px;
-    }
-
-    h1 {
-      font-size: 1.8rem;
-      text-align: center;
+      background-color: #f4f6f9;
       color: #333;
-      margin-bottom: 20px;
+    }
+
+    .sidebar {
+      width: 260px;
+      background-color: #1b1f23;
+      color: white;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .sidebar img {
+      width: 140px;
+      margin-bottom: 30px;
+    }
+
+    .chat-area {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      padding: 40px;
+      background: #ffffff;
+    }
+
+    .chat-header {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #cc0000;
+      margin-bottom: 30px;
     }
 
     textarea {
       width: 100%;
-      padding: 12px;
-      border-radius: 8px;
+      padding: 14px;
+      border-radius: 10px;
       border: 1px solid #ccc;
-      resize: vertical;
       font-size: 1rem;
-      margin-bottom: 10px;
+      resize: vertical;
+      margin-bottom: 15px;
+      min-height: 100px;
     }
 
     button {
-      display: inline-block;
-      padding: 10px 20px;
-      font-size: 1rem;
-      background-color: #4a90e2;
+      background-color: #cc0000;
       color: white;
       border: none;
-      border-radius: 6px;
+      border-radius: 8px;
+      padding: 12px 20px;
+      font-size: 1rem;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      width: 150px;
     }
 
     button:hover {
-      background-color: #357ab8;
+      background-color: #a30000;
     }
 
     h3 {
-      margin-top: 20px;
+      margin-top: 30px;
       color: #444;
     }
 
     pre {
       background-color: #f0f0f0;
-      padding: 15px;
-      border-radius: 6px;
+      padding: 20px;
+      border-radius: 8px;
       font-family: monospace;
       white-space: pre-wrap;
       word-wrap: break-word;
+      border: 1px solid #ddd;
+    }
+
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+
+      .sidebar {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+        padding: 20px;
+      }
+
+      .chat-area {
+        padding: 20px;
+      }
+
+      button {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="chat-container">
-    <h1>Ansari Exchange Attendance AI BOT</h1>
-    <textarea id="question" rows="4" placeholder="Ask your question here..."></textarea><br />
+  <div class="sidebar">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/OpenShift-LogoType.svg" alt="OpenShift Logo" />
+  </div>
+
+  <div class="chat-area">
+    <div class="chat-header">Attendance AI Assistant</div>
+    <textarea id="question" placeholder="Ask your question here..."></textarea>
     <button onclick="sendQuestion()">Ask</button>
 
     <h3>Answer:</h3>
-    <pre id="answer"></pre>
+    <pre id="answer">Awaiting your question...</pre>
   </div>
 
   <script>
